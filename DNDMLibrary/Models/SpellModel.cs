@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace DNDMLibrary.Models
 {
@@ -30,10 +31,25 @@ namespace DNDMLibrary.Models
         {
             bool isCorrect = false;
 
-            if(!name.Equals("")&& !casting_time.Equals("") && !range.Equals("") && !components.Equals("") && !duration.Equals("") && !descr.Equals("") )
+            if(!name.Equals("") && !casting_time.Equals("") && !range.Equals("") && !components.Equals("") && !duration.Equals("") && !descr.Equals("") )
             {
+                Debug.WriteLine(name);
+                Debug.WriteLine(casting_time);
+                Debug.WriteLine(range);
+                Debug.WriteLine(components);
+                Debug.WriteLine(duration);
+                Debug.WriteLine(descr);
+
+
                 isCorrect = true;
             }
+
+            Debug.WriteLine(name);
+            Debug.WriteLine(casting_time);
+            Debug.WriteLine(range);
+            Debug.WriteLine(components);
+            Debug.WriteLine(duration);
+            Debug.WriteLine(descr);
 
             return isCorrect;
         }

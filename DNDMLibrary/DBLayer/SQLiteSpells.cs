@@ -37,8 +37,6 @@ namespace DNDM
             }
         }
 
-
-
         public static void SaveSpell(SpellModel spell)
         {
             using (IDbConnection con = new SQLiteConnection(LoadConnectionString()))
@@ -57,17 +55,14 @@ namespace DNDM
             }
 
         }
-
-
-        public static void UpdateNote(NotesModel note)
+    
+        public static List<SpellModel> LoadSpellsByTitle(string searchText)
         {
-
             using (IDbConnection con = new SQLiteConnection(LoadConnectionString()))
             {
-                con.Execute("UPDATE Notes SET title=@title ,descr=@descr WHERE title=@title;", note);
+                var output = con.Query<SpellModel>("SELECT * from Spells WHERE name = @searchText",new {searchText});
+                return output.ToList();
             }
-
         }
-
     }
 }
