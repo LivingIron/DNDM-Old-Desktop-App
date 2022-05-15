@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DNDMLibrary;
+using DNDMLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,59 +12,47 @@ using System.Threading.Tasks;
 
 namespace DNDM
 {
-    public class SQLiteNote
+    public class SQLiteSpells
     {
         private static string LoadConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
-        public static List<NotesModel> LoadNotes()
+        public static List<SpellModel> LoadSpells()
         {
             using (IDbConnection con = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = con.Query<NotesModel>("SELECT * from Notes");
+                var output = con.Query<SpellModel>("SELECT * from Spells");
                 return output.ToList();
             }
         }
 
-        public static NotesModel LoadNoteById(int tempid)
+        public static List<SchoolModel> LoadSchools()
         {
             using (IDbConnection con = new SQLiteConnection(LoadConnectionString()))
             {
-                con.Open();
-                using (var command = con.CreateCommand())
-                {
-                    command.CommandText = "SELECT* from Notes WHERE id = @tempid";
-                    command.Parameters.Add(new SQLiteParameter("@tempid", tempid));
-                    var output = command.ExecuteReader();
-                    NotesModel note = new NotesModel();
-                    output.Read();
-                    note.id = output.GetInt32(0);
-                    note.title = output.GetString(1);
-                    note.descr = output.GetString(2);
-
-
-                    return note;
-                }
-
+                var output = con.Query<SchoolModel>("SELECT * from MagicSchool");
+                return output.ToList();
             }
         }
 
-        public static void SaveNote(NotesModel note)
+
+
+        public static void SaveSpell(SpellModel spell)
         {
             using (IDbConnection con = new SQLiteConnection(LoadConnectionString()))
             {
-                con.Execute("INSERT INTO Notes(title,descr) VALUES (@title,@descr)", note);
+                con.Execute("INSERT INTO Spells(name,school_id,lvl,casting_time,range,components,duration,descr) VALUES (@name,@school_id,@lvl,@casting_time,@range,@components,@duration,@descr)", spell);
             }
         }
 
-        public static bool CheckIfNoteExists(string note)
+        public static bool CheckIfSpellExists(string spellName)
         {
 
             using (IDbConnection con = new SQLiteConnection(LoadConnectionString()))
             {
-                var exists = con.ExecuteScalar<bool>("SELECT COUNT(1) FROM Notes WHERE title=@note ", new { note });
+                var exists = con.ExecuteScalar<bool>("SELECT COUNT(1) FROM Spells WHERE name=@spellName ", new { spellName });
                 return exists;
             }
 

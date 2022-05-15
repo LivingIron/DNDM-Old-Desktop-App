@@ -46,14 +46,20 @@ namespace DNDM
             note.descr = textBox2.Text;
 
             bool doesExist = SQLiteNote.CheckIfNoteExists(note.title);
-
-            if (doesExist)
-            {
-                SQLiteNote.UpdateNote(note);
+            if (note.Validate())
+            { 
+                if (doesExist)
+                {
+                    SQLiteNote.UpdateNote(note);
+                }
+                else
+                {
+                    SQLiteNote.SaveNote(note);
+                }
             }
             else
             {
-                SQLiteNote.SaveNote(note);
+                MessageBox.Show("Error! Please fill out all boxes !");
             }
 
             textBox1.Clear();

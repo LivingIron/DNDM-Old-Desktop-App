@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DNDMLibrary.Models
 {
-    class SpellModel
+    public class SpellModel
     {
         
         public int id { get; set; }
@@ -24,6 +24,18 @@ namespace DNDMLibrary.Models
         public string ToString()
         {
             return name;
+        }
+
+        public bool Validate()
+        {
+            bool isCorrect = false;
+
+            if(!name.Equals("")&& !casting_time.Equals("") && !range.Equals("") && !components.Equals("") && !duration.Equals("") && !descr.Equals("") )
+            {
+                isCorrect = true;
+            }
+
+            return isCorrect;
         }
 
 

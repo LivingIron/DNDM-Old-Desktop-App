@@ -19,5 +19,17 @@ namespace DNDMLibrary
         {
             return title+"\n"+descr;
         }
+
+        public bool Validate()
+        {
+            bool isCorrect = false;
+
+            if (!title.Equals("") && !descr.Equals("") )
+            {
+                isCorrect = true;
+            }
+
+            return isCorrect;
+        }
     }
 }

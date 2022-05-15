@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DNDMLibrary.Models
 {
-    class ConfigModel
+    public class ConfigModel
     {
         public int id { get; set; }
         public string name { get; set; }
