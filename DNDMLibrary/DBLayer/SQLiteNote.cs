@@ -81,5 +81,16 @@ namespace DNDM
 
         }
 
+        public static void DeleteNote(int noteId)
+        {
+
+            using (IDbConnection con = new SQLiteConnection(LoadConnectionString()))
+            {
+                con.Execute("DELETE FROM Notes WHERE id = @noteId ", new { noteId });
+            }
+
+        }
+
+
     }
 }

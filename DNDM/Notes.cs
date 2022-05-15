@@ -78,5 +78,11 @@ namespace DNDM
 
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SQLiteNote.DeleteNote(dataGridView1.CurrentCell.RowIndex+1);
+            PopulateDataGrid();
+        }
     }
 }
