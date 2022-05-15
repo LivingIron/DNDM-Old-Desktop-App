@@ -26,5 +26,12 @@ namespace DNDM
             DiceRoller.Show();
             this.Close();
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            var Notes = new Notes();
+            Notes.Show();
+
+        }
     }
 }
