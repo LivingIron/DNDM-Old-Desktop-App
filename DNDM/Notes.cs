@@ -28,7 +28,8 @@ namespace DNDM
 
         private void Notes_Load(object sender, EventArgs e)
         {
-          
+            label1.BackColor = Color.Transparent;
+            label2.BackColor = Color.Transparent;
 
         }
 
